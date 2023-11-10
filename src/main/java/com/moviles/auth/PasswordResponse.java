@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PasswordResponse {
 	
-	String username;
+	int codigo;
 	String password;
 
 }

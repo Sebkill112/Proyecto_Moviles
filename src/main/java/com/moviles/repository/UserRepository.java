@@ -15,11 +15,13 @@ public interface UserRepository extends JpaRepository<Usuario, Integer> {
 	Optional<Usuario> findByUsername(String user);
 
 	boolean existsByUsername(String username);
+	
+	boolean existsByCodigo(int cod);
 
 	@Query("select e from RolEnlace re join re.enlace e where re.rol.codigo=?1")
 	public List<Enlace> traerEnlacesDelUsuario(int codigoRol);
 
 	@Modifying
-	@Query(value = "update tb_usuario set password = ?1 WHERE username = ?2", nativeQuery = true)
-	public void actualizarContraseña(String password, String username);
+	@Query(value = "update tb_usuario set password = ?1 WHERE cod_usu = ?2", nativeQuery = true)
+	public void actualizarContraseña(String password, int cod);
 }

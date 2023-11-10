@@ -82,20 +82,13 @@ public class AuthController {
 	@Transactional
 	public ResponseEntity<String> cambiarPassword(@RequestBody PasswordResponse request) {
 
-		boolean usernameExists = userRepository.existsByUsername(request.getUsername());
-
-		if (!usernameExists) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body("El Usuario con Username: " + request.getUsername() +  " no esta registrado");
-		} else {
 
 			String pass = passwordEncoder.encode(request.getPassword());
-			String user = request.getUsername();
-			
+			int user = request.getCodigo();
 			
 			userRepository.actualizarContraseña(pass, user);
 			
-			return ResponseEntity.ok("Contraseña del usuario: " + request.getUsername() + " actualizada correctamente");
+			return ResponseEntity.ok("Contraseña del usuario actualizada correctamente");
 		}
 	}
-}
+
